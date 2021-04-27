@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>계량형 관리도</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+
+    <div class="container">
+        <header><h2>계량형 관리도(Control Charts for Variables)</h2></header>
+        <section class="content">
+            <nav>
+                <ul>
+                    <li><a href="x-r.html">\(\bar{X} - R \) 관리도</a></li>
+                    <li><a href="x-s.html">\(\bar{X} - s \) 관리도</a></li>
+                    <li><a href="i-mr.html">\(x - mR \) 관리도</a></li>
+                    <li><a href="cusum.html">\(CUSUM\) 관리도</a></li>
+                    <li><a href="ewma.html">\(EWMA\) 관리도</a></li>
+                    <li><a href="coeff.html">관리도 계수표</a></li>
+                </ul>
+            </nav>
+            <main>
+                <p>매우 잘 설계되고, 잘 관리되고 있는 생산 공정에서도, 어느 정도의 고유 또는 자연적인 변동은 
+                항상 존재한다. 이러한 자연적 변동은 여러가지 피할 수 없는 작은 원인이 축적된 결과이다. 통계적 
+                품질관리 측면에서 이러한 자연적 변동으로만 영향을 받는 시스템은 우연 원인에 의한 안정된 시스템이라 
+                할 수 있다. 따라서 우연 원인으로만 이루어진 변동을 갖는 프로세스는 통계적 관리 안(in control)에 
+                있다고 할 수 있다. 다시 말해서 우연 원인은 공정이 갖는 고유한 성질이다.</p>
+                <p>이와는 달리, 부적절하게 조정된 장치, 작업자의 실수, 불량한 원재료 등에 의한 공정의 변동은 특수 
+                원인에 의한 변동이라 하며 이러한 원인이 존재하는 공정은 관리 밖(out of control)에 있다고 할 수 있다. 
+                대부분의 공정은 관리상태 안에서 오래 동안 운전된다. 그러나 영원히 관리상태 안에 있을 수는 없으며 
+                불가피하게 특수 원인은 일어나게 마련이다. 따라서 공정변동이 발생하고 공정관리 밖의 상태를 갖게 된다. 
+                통계적 공정관리(SPC: Statistical Process Control)의 주목적은 공정변동의 특수원인을 빨리 발견하고 이에 
+                의한 불량품이 생산되기 전에 조사 및 대응조치를 할 수 있도록 하는데 있다. 관리도(control chart)는 이러한
+                목적으로 널리 사용되는 공정 모니터링 기법이다. 이는 공정 파라메터를 평가하는데 사용되며, 공정능력을 
+                결정하는 등 공정개선에 유용한 정보를 제공한다. 궁극적으로는 공정에서 발생하는 변동을 없애는 것을
+                목표로 한다.</p>
+                <p>알려진 바와 같이 정규분포는 자연에서 우연 원인의 결과로 얻어지는 데이터가 갖는 분포이다. 따라서 
+                관리 안에 있는 공정에서 나오는 데이터는 정규분포를 가진다는 가정이 관리도의 개념에 들어가 있다. 
+                즉, 관리도의 데이터가 정규분포를 가지지 않는다면 공정에 특수 원인이 들어가 있을 가능성이 높다고 보는 
+                것이다. Fig.1은 데이터의 특성에 따라 분류되는 관리도를 구분한 그림이다. 그림에 나타낸 바와 같이 관리도는 계량형(variables)과 
+                계수형(attributes)으로 나뉘며, 샘플의 크기(n)와 공정변동(process shift)의 크기에 따라 나뉜다. 
+                여기에서는 계량형 관리도만 다루기로 한다.</p>
+                <figure class="Figure">
+                    <img src="Fig-1.png" width="800">
+                    <figcaption >Fig.1 데이터에 따른 관리도 분류 (<cite>Introduction to Statistical Quality Control
+                    , D.C. Montgomery</cite>)</figcaption>
+                </figure>
+            </main>
+        </section>
+    </div>
+	
+</body>
+</html>

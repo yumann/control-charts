@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>EWMA Control Chart</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div class="container">
+        <header><h2>\(EWMA\) 관리도</h2></header>
+        <section class="content">
+            <nav>
+                <ul>
+                    <li><a href="x-r.html">\(\bar{X} - R \) 관리도</a></li>
+                    <li><a href="x-s.html">\(\bar{X} - s \) 관리도</a></li>
+                    <li><a href="i-mr.html">\(x - mR \) 관리도</a></li>
+                    <li><a href="cusum.html">\(CUSUM\) 관리도</a></li>
+                    <li><a href="ewma.html">\(EWMA\) 관리도</a></li>
+                    <li><a href="coeff.html">관리도 계수표</a></li>
+                </ul>
+            </nav>
+            <main>
+                <p>EWMA(Exponentially Weighted Moving Average) 관리도도 앞에서 말한 바와 같이 Shewhart 관리도의 대안으로 
+                사용된다. 그 성능은 CUSUM 관리도와 동등 하다고 알려져 있는데, 방법적인 면에서 CUSUM 관리도보다 편한 경우가 
+                많다. 이는 다음의 수식과 같이 정의된다.</p>
+                <div class="equation">
+                \[z_i = \lambda x_i + (1 - \lambda)z_{i-1}\]
+                </div>
+                <p>여기서 &lambda;는 과거 데이터의 영향을 결정하는 파라메터로 이 값이 1에 가까울수록 현재 데이터(x<sub>i</sub>)의 
+                영향은 커지고 과거 데이터의 영향은 작아진다. 이렇게 정의된 EWMA의 분산은 x<sub>i</sub>의 분산이 \(\sigma^2\) 인 
+                경우</p>
+                <div class="equation">
+                \[\sigma_{z_i}^2 = \sigma^2 \left(\frac{\lambda}{2-\lambda}\right)[1 - (1-\lambda)^{2i}]\]
+                </div>
+                <p>이며, EWMA 관리도는 Center line은 &mu;<sub>0</sub> (x<sub>i</sub>의 평균값), 관리한계선은 다음과 같이 된다.</p>
+                <div class="equation">
+                \[UCL = \mu_0 + L\sigma \sqrt{\frac{\lambda}{2-\lambda}[1 - (1-\lambda)^{2i}]}\]
+                \[LCL = \mu_0 - L\sigma \sqrt{\frac{\lambda}{2-\lambda}[1 - (1-\lambda)^{2i}]}\]
+                </div>
+                <p>여기서 L은 관리한계선의 폭을 정하는 파라메터이다. 적절한 λ와 L 값을 정함으로써 EWMA 관리도를 작성한다. 보통 
+                &lambda; = 0.1, L = 2.7의 값이 권장된다. Fig.7에 CUSUM 관리도의 경우와 같은 데이터를 이용하여 EWMA 관리도를 
+                나타내었다.</p>
+                <figure class="Figure">
+                    <img src="Fig-7.png" width="500">
+                    <figcaption >Fig.7 Individual x chart와 \(EWMA\) 관리도</figcaption>
+                </figure>
+                <p>Fig.7에서도 individual x chart에서는 나타나지 않는 공정변동(1&sigma; 수준의 평균값 변동)이 
+                EWMA 관리도에서는 뚜렷이 나타나고 있음을 볼 수 있다.</p>
+            </main>
+        </section>
+    </div>
+	
+</body>
+</html>

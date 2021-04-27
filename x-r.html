@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>X-R Control Chart</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div class="container">
+        <header><h2>\(\bar{X}-R\) 관리도</h2></header>
+        <section class="content">
+            <nav>
+                <ul>
+                    <li><a href="x-r.html">\(\bar{X} - R \) 관리도</a></li>
+                    <li><a href="x-s.html">\(\bar{X} - s \) 관리도</a></li>
+                    <li><a href="i-mr.html">\(x - mR \) 관리도</a></li>
+                    <li><a href="cusum.html">\(CUSUM\) 관리도</a></li>
+                    <li><a href="ewma.html">\(EWMA\) 관리도</a></li>
+                    <li><a href="coeff.html">관리도 계수표</a></li>
+                </ul>
+            </nav>
+            <main>
+                <p>이 관리도는 샘플의 크기 n이 2~6개 일 때 사용하는 관리도이며, 가장 많이 사용되고 있다. 샘플의 
+                크기는 일정해야 한다. Table-1에 이 관리도 사례에 사용되는 데이터를 나타내었다. 25개의 subgroup으로 
+                이루어져 있으며 각 subgroup에서 샘플 크기는 5개로 일정하다.</p>
+                <figure class="Table">
+                    <figcaption>Table 1 \(\bar{X}-R\) 관리도 데이터(<cite>Introduction to Statistical Quality Control
+                    , D.C. Montgomery</cite>)</figcaption>
+                    <img src="Table-1.png" width="500">
+                </figure>
+                
+                <p>\(\bar{x}_i\)와 \(R_i\)는 각각 i번째 subgroup에서 샘플의 평균과 범위(최대값과 최소값의 차)이다.
+                이로부터 관리도의 CL(center line)과 UCL(Upper Control Limit), LCL(Lower Control Limit)을 구하면, </p>
+                <div class="equation">
+                \[CL_x = \frac{\sum \bar{x}_i}{25}=1.5056\]
+                \[UCL_x = CL_x + A_2 \bar{R} = 1.506=56 + (0.577)(0.32521)=1.69326\]
+                \[LCL_x = CL_x - A_2 \bar{R} = 1.506=56 - (0.577)(0.32521)=1.31796\]
+                </div>
+                <p>이고, R의 관리한계선은</p>
+                <div class="equation">
+                \[\bar{R} = \frac{\sum \bar{R}_i}{25} = 0.32521\]
+                \[UCL_R = D_4 \bar{R} = (2.114)(0.32521) = 0.68749\]
+                \[LCL_R = D_3 \bar{R} = (0)(0.32521) = 0\]
+                </div>
+                <p>여기서 \(A_2 ,\,D_3 ,\, D_4\)는 3\(\sigma\)에 해당하는 계수로서 샘플 크기 n의 함수이며 "관리도 계수표"로부터 
+                구할 수 있다. Fig.2에 \(\bar{X} - R\) 관리도를 나타내었다.</p>
+                <figure class="Figure">
+                    <img src="Fig-2.png" width="800">
+                    <figcaption >Fig.2 \(\bar{X} - R\) 관리도</figcaption>
+                </figure>
+                <p>그림에서는 각 subgroup의 데이터를 boxplot으로, 각각의 데이터를 점으로 나타내었다. 각 데이터의 값은 관리한계선을 
+                넘는 것이 있지만, 샘플의 평균은 관리한계선 내에서 움직이고 있다. 16번의 경우 R 관리한계선에 거의 근접하여 
+                subgroup 내 편차가 심하므로 원인을 조사할 필요가 있다. 만일 원인이 발견되어 조치가 되면 이 데이터는 제거하고 
+                수정된 관리도를 작성하도록 한다. </p>
+            </main>
+        </section>
+    </div>
+	
+</body>
+</html>

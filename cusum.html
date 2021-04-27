@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>CUSUM Control Chart</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div class="container">
+        <header><h2>\(CUSUM\) 관리도</h2></header>
+        <section class="content">
+            <nav>
+                <ul>
+                    <li><a href="x-r.html">\(\bar{X} - R \) 관리도</a></li>
+                    <li><a href="x-s.html">\(\bar{X} - s \) 관리도</a></li>
+                    <li><a href="i-mr.html">\(x - mR \) 관리도</a></li>
+                    <li><a href="cusum.html">\(CUSUM\) 관리도</a></li>
+                    <li><a href="ewma.html">\(EWMA\) 관리도</a></li>
+                    <li><a href="coeff.html">관리도 계수표</a></li>
+                </ul>
+            </nav>
+            <main>
+                <p>CUSUM(Cumulative Sum: 누적합) 관리도는 Shewhart 관리도의 단점인 공정변동의 둔감성을 보완하기 위해 제안된 것이다. 
+                예제를 통해 CUSUM 관리도의 특성과 그 작성법을 알아보자. Table-4는 CUSUM 관리도를 위한 예제 데이터이다. 데이터와 
+                함께 누적합을 구하는 과정도 나타내었다.</p>
+                <figure class="Table">
+                    <figcaption>Table 4 \(CUSUM\) 관리도 데이터(<cite>Introduction to Statistical Quality Control
+                    , D.C. Montgomery</cite>)</figcaption>
+                    <img src="Table-4.png" width="400">
+                </figure>
+                <p>Table-4의 (a)열에 원데이터를 표시하였다. 원데이터는 공정변동을 나타내기 위해 1~20까지는 평균 10, 표준편차 1인 
+                정규분포에서 얻은 데이터이고, 21~30은 평균 11, 표준편차 2인 정규분포에서 얻은 데이터로 구성되었다. (b)열은 (a)열에서 
+                평균값인 10을 뺀 것이고 (c)열은 (b)열의 값을 누적합하여 얻은 값이다. Fig.5에 (a)열의 데이터와 (c)열의 누적합을 
+                나타내었다.</p>
+                <figure class="Figure">
+                    <img src="Fig-5.png" width="800">
+                    <figcaption >Fig.5 Individual x chart와 누적합 그래프</figcaption>
+                </figure>
+                <p>Fig.5에 나타낸 바와 같이 Shewhart individual x 관리도에서는 21번째 데이터 이후 공정변동이 있으나 그 변화를 
+                알아내기 힘들다. (물론 Western electric rules와 같은 감지규칙을 적용하면 공정변동을 발견할 수 있을 것이다.) 
+                그러나 누적합 그래프에서는 21번째 데이터 이후의 공정변동이 확연히 나타나고 있음을 알 수 있다. 이와 같이 누적합 
+                개념(과거 데이터의 정보를 합한다는 개념)은 작은 공정변동(이 경우에는 1&sigma;)을 효과적으로 감지할 수 있다는 것을 
+                보여주고 있다. 누적합 개념에 감지하고자 하는 공정변동의 수준과 관리한계를 적용한 관리도가 CUSUM 관리도이다. 
+                이는 다음과 같은 수식으로 + 방향의 누적합과 - 방향의 누적합(2-sided 누적합)을 정의한다.</p>
+                <div class="equation">
+                \[C_i^+ = max[0, x_i - \mu_0 - K + C_{i-1}^+] \,\,\,\, C_i^- = min[0, x_i - \mu_0 + K + C_{i-1}^-]\]
+                </div>
+                <p>여기서 K는 감지하고자 하는 공정변동의 수준을 나타내는 파라메터로 보통 0.5&sigma; 수준으로 잡는다. 또한 
+                관리 한계선은 ±5&sigma;로 하는 것을 권장하고 있다. 물론 K를 작게 할수록 작은 공정변동을 감지할 수 있으나 제1종 
+                오류를 범할 확률도 높아지게 된다. Fig.6에 CUSUM 관리도를 나타내었다. 파란색은 C<sup>+</sup>를, 빨간색은 
+                C<sup>-</sup>를 나타낸다.</p>
+                
+                <figure class="Figure">
+                    <img src="Fig-6.png" width="800">
+                    <figcaption >Fig.6 Individual x chart와 2-sided \(CUSUM\) 관리도</figcaption>
+                </figure>
+                <p>Fig.6의 두 그래프에서 알 수 있듯이 individual x chart에서는 나타나지 않는 공정변동(1&sigma; 수준의 평균값 변동)이 
+                CUSUM 관리도에서는 뚜렷이 나타나고 있음을 볼 수 있다.</p>
+            </main>
+        </section>
+    </div>
+	
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>I-mR Control Chart</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div class="container">
+        <header><h2>\(x-mR\) 관리도</h2></header>
+        <section class="content">
+            <nav>
+                <ul>
+                    <li><a href="x-r.html">\(\bar{X} - R \) 관리도</a></li>
+                    <li><a href="x-s.html">\(\bar{X} - s \) 관리도</a></li>
+                    <li><a href="i-mr.html">\(x - mR \) 관리도</a></li>
+                    <li><a href="cusum.html">\(CUSUM\) 관리도</a></li>
+                    <li><a href="ewma.html">\(EWMA\) 관리도</a></li>
+                    <li><a href="coeff.html">관리도 계수표</a></li>
+                </ul>
+            </nav>
+            <main>
+                <p>이 관리도는 샘플의 크기 n이 1인 경우의 관리도이다. 따라서 subgroup의 개념이 없으므로 이전 데이터와의 차이를 
+                이동범위(MR: Moving Range)로 정의하여 이전의 범위(R) 또는 표준편차(s)를 대신하여 사용한다. Table-3은 x−mR 관리도 
+                사례에 사용되는 데이터이다. 20개의 측정값으로 이루어져 있다.</p>
+                <figure class="Table">
+                    <figcaption>Table 3 \(x-mR\) 관리도 데이터(<cite>Introduction to Statistical Quality Control
+                    , D.C. Montgomery</cite>)</figcaption>
+                    <img src="Table-3.png" width="300">
+                </figure>
+                
+                <p>샘플수가 1개이므로 다른 관리도보다 간단히 center line과 관리한계선을 구할 수 있다. x와 mR의 CL은.</p>
+                <div class="equation">
+                \[CL_x = \bar{x} =\frac{\sum \bar{x}_i}{20}=300.5\]
+                \[\bar{MR} = \frac{\sum (MR)_i}{20-1}=7.79\]
+                </div>
+                <p>x와 mR에 대한 관리한계선은</p>
+                <div class="equation">
+                \[UCL_x = CL_x + 3 \frac{\bar{MR}}{d_2} =300.5 + 3 \frac{7.79}{1.128}=321.22\]
+                \[LCL_x = CL_x - 3 \frac{\bar{MR}}{d_2} =300.5 - 3 \frac{7.79}{1.128}=279.78\]
+                \[UCL_{mR} = D_4 \bar{MR} = (3.267)(7.79) = 25.45\]
+                \[LCL_{mR} = D_3 \bar{MR} = (0)(7.79) = 0\]
+                </div>
+                <p>여기서 \(d_2 ,\,D_3 ,\, D_4\)는 3\(\sigma\)에 해당하는 계수로서 샘플 크기 n=2 일 때의 값이다. 왜냐하면 mR을 
+                구하는데 2개의 데이터를 이용하였기 때문이다. 이들 역시 "관리도 계수표"로부터 구할 수 있다. Fig.4에 \(x-mR\) 관리도를 
+                나타내었다.</p>
+                <figure class="Figure">
+                    <img src="Fig-4.png" width="800">
+                    <figcaption >Fig.4 \(x-mR\) 관리도</figcaption>
+                </figure>
+                <p>이상에서 살펴본 3개의 관리도는 Shewhart 관리도라고 부르며, 1920년에 Shewhart가 처음 제시한 후 발전을 거듭하여
+                공정변동에 대한 관리이탈을 감지하고 그에 따른 원인을 조사, 수정할 수 있도록 하는 강력한 수단으로 널리 사용되고 있다. 
+                그러나 단점으로서 Shewhart 관리도는 오직 마지막 데이터 만을 사용하고 전체 데이터로부터 얻어지는 정보는 무시하고 있다. 
+                이 결과, Shewhart 관리도는 작은 공정변동(1.5&sigma; 이내)에는 둔감한 경향을 보인다. 즉 이들 관리도는 공정변동이 
+                1.5&sigma; 이상일 때는 이를 효과적으로 감지하지만, 이보다 작은 공정변동에 대해서는 둔감하다는 것이다. 물론 다른 규칙, 
+                즉 Western electric rules와 같은 감지규칙을 부가적으로 사용하여 이러한 단점을 보완하고 있으나 이는 관리도의 장점인 
+                단순성(simplicity)을 손상시키며, 특히 관리하에 있는(in control) 공정에서 제1종 오류(양품을 불량으로 판정하는 오류)의 
+                확률을 높이는 결과를 초래한다.</p>
+            </main>
+        </section>
+    </div>
+	
+</body>
+</html>

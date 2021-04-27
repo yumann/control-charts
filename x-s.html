@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>X-s Control Chart</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div class="container">
+        <header><h2>\(\bar{X}-s\) 관리도</h2></header>
+        <section class="content">
+            <nav>
+                <ul>
+                    <li><a href="x-r.html">\(\bar{X} - R \) 관리도</a></li>
+                    <li><a href="x-s.html">\(\bar{X} - s \) 관리도</a></li>
+                    <li><a href="i-mr.html">\(x - mR \) 관리도</a></li>
+                    <li><a href="cusum.html">\(CUSUM\) 관리도</a></li>
+                    <li><a href="ewma.html">\(EWMA\) 관리도</a></li>
+                    <li><a href="coeff.html">관리도 계수표</a></li>
+                </ul>
+            </nav>
+            <main>
+                <p>이 관리도는 샘플의 크기 n이 8개 이상이거나 subgroup에 따라 n이 변할 때 사용하는 관리도이다. 
+                subgroup 데이터의 범위(R) 대신 표준편차(s)를 사용한다. Table-2은 \(\bar{X} - s\) 관리도 사례에 사용되는 
+                데이터이다. 25개의 subgroup으로 이루어져 있으며 각 subgroup은 샘플수가 일정하지 않고 변한다.</p>
+                <figure class="Table">
+                    <figcaption>Table 2 \(\bar{X}-s\) 관리도 데이터(<cite>Introduction to Statistical Quality Control
+                    , D.C. Montgomery</cite>)</figcaption>
+                    <img src="Table-2.png" width="500">
+                </figure>
+                
+                <p>\(\bar{x}_i\)와 \(s_i\)는 각각 i번째 subgroup의 평균과 표준편차이다. 각 subgroup의 샘플 크기가 변하므로 
+                관리도의 center line과 관리한계선을 구하는 것이 약간 복잡하다. \(\bar{x}\)의 CL과 \(s_i\)의 CL은 아래와 같다.</p>
+                <div class="equation">
+                \[CL_x = \frac{\sum n_i \bar{x}_i}{\sum n_i}=\frac{5(74.01)+3(73.996)+\cdots +5(73.998)}{5+3+\cdots +5}=74.001\]
+                \[\bar{s} = \left[ \frac{\sum (n_i -1)s_i^2}{\sum n_i -25}\right]^{1/2} 
+                = \left[ \frac{4(0.0148)^2 + 2(0.0046)^2+ \cdots + 4(0.0162)^2}{5+3+\cdots + 5 -25}\right]^{1/2}=0.0102\]
+                </div>
+                <p>여기서 n<sub>i</sub>는 subgroup i의 샘플의 크기를 나타낸다. 그리고 subgroup 1의 x와 s에 대한 관리한계선은</p>
+                <div class="equation">
+                \[UCL_x = CL_x + A_3 \bar{s} =74.001 + (1.427)(0.0012)=74.015\]
+                \[LCL_x = CL_x - A_3 \bar{s} =74.001 - (1.427)(0.0012)=73.986\]
+                \[UCL_s = B_4 \bar{s} = (2.089)(0.0102) = 0.021\]
+                \[LCL_s = B_3 \bar{s} = (0)(0.0102) = 0\]
+                </div>
+                <p>여기서 \(A_3 ,\,B_3 ,\, B_4\)는 3\(\sigma\)에 해당하는 계수로서 샘플 크기 n의 함수이며 "관리도 계수표"로부터 
+                구할 수 있다. Fig.3에 \(\bar{X} - s\) 관리도를 나타내었다. 샘플 크기가 변하므로 계수값도 변하여 관리한계선도 변하는 
+                것을 알 수 있다.</p>
+                <figure class="Figure">
+                    <img src="Fig-3.png" width="800">
+                    <figcaption >Fig.3 \(\bar{X} - s\) 관리도</figcaption>
+                </figure>
+                <p>그림에서는 각 subgroup의 데이터를 boxplot으로, 각각의 데이터를 점으로 나타내었다. 각 데이터의 값은 관리한계선을 
+                넘는 것이 있지만, 샘플의 평균은 관리한계선 내에서 움직이고 있다. 샘플수가 작으면 관리한계의 폭이 넓어지는 것을 알 수 
+                있다. 1, 3, 14, 25번의 경우 subgroup 내 편차가 심하므로 원인을 조사할 필요가 있다. 만일 원인이 발견되어 조치가 
+                되면 이 데이터는 제거하고 수정된 관리도를 작성하도록 한다.</p>
+            </main>
+        </section>
+    </div>
+	
+</body>
+</html>
