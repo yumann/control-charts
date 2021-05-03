@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>cu Control Chart</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div class="container">
+        <header><h2>결점수(c), 단위당 결점수(u) 관리도</h2></header>
+        <section class="content">
+            <nav>
+                <h4>계량형 관리도</h4>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="x-r.html">\(\bar{X} - R \) 관리도</a></li>
+                    <li><a href="x-s.html">\(\bar{X} - s \) 관리도</a></li>
+                    <li><a href="i-mr.html">\(x - mR \) 관리도</a></li>
+                    <li><a href="cusum.html">\(CUSUM\) 관리도</a></li>
+                    <li><a href="ewma.html">\(EWMA\) 관리도</a></li>
+                    <li><a href="coeff.html">관리도 계수표</a></li>
+                </ul>
+                <h4>계수형 관리도</h4>
+                <ul>
+                    <li><a href="p.html">p, np 관리도</a></li>
+                    <li><a href="cu.html">c, u 관리도</a></li>
+                </ul>
+            </nav>
+            <main>
+                <p>결점수 관리도는 제품의 일정단위 중에 니타나는 결점수를 관리하는 데 사용된다. 제품에 따라서는 약간의 
+                결점이 있어도 불량으로 처리되지 않고 사용 가능한 경우가 있다. 예를 들면 강판이나 직물의 경우 일정 단위
+                면적당  약간의 스크래치가 있어도 사용할 수 있을 것이다. 일정단위당 결점수 관리에는 c 관리도가 사용되고, 
+                단위가 변하는 경우에는 u 관리도가 사용된다. 일정단위당 결점수는 포아송 분포를 따른다고 알려져 있다. 
+                그 확률분포는 다음과 같다. </p> 
+                <div class="equation">
+                \[P(X=x) = \frac{e^{-c}c^x}{x!}, \,\,\, x=0,1,2,\cdots\]
+                </div>
+                <p>이때 평균은 \(c\), 분산도 \(c\)이다. 이로부터 관리한계선은 c가 알려져 있는 경우 3&sigma;를 기준으로 
+                다음과 같다. </p>
+                <div class="equation">
+                \[CL = c\]
+                \[UCL = c + 3\sqrt{c}\]
+                \[LCL = c - 3\sqrt{c}\]
+                </div>
+                <p>그러나 실제에서는 평균값 \(c\)를 모르고 있으므로 아래의 추정값으로 대체하여 사용한다. </p>
+                <div class="equation">
+                \[\bar{c} = \frac{발견된 \, 총결점수}{검사한 \,총단위수}\]
+                </div>
+                <p>Table-6의 데이터는 샘플 사이즈가 50으로 단위가 일정한 경우의 결점수를 나타낸 자료이다.</p>
+                <figure class="Table">
+                    <figcaption>Table 6 샘플 크기가 일정한 결점수 데이터(<cite>Introduction to Statistical Quality Control
+                    , D.C. Montgomery</cite>)</figcaption>
+                    <img src="Table-7.png" width="600">
+                </figure>
+                <p>이 데이터로부터 c 관리도의 관리한계선을 구하면 다음과 같다. </p>
+                <div class="equation">
+                \[\bar{c}= \frac{발견된\,총결점수}{검사한\,총단위수}= \frac{\sum x_i}{20}=\frac{74}{20}=3.7\]
+                \[UCL=\bar{c} + 3\sqrt{\bar{c}}=3.7 + 3\sqrt{3.7}= 9.471\]
+                \[LCL=\bar{c} - 3\sqrt{\bar{c}}=3.7 - 3\sqrt{3.7}=-2.07 \rightarrow 0\]
+                </div>
+                <p>이 관리도는 샘플 50개를 한 단위로 하여 구한 관리도이다. 만일 샘플 1개당의 결점수 관리도를 구하려면 
+                u 관리도를 이용한다. 이 경우 관리한계선은 다음과 같다.</p>
+                <div class="equation">
+                \[CL = \bar{u} = \frac{\sum u_i}{20}=\frac{1.48}{20}=0.074\] 
+                \[UCL = \bar{u} + 3 \sqrt{\frac{\bar{u}}{n}}=0.074 + 3\sqrt{\frac{0.074}{50}}=0.1894\]
+                \[LCL = \bar{u} - 3 \sqrt{\frac{\bar{u}}{n}}=0.074 - 3\sqrt{\frac{0.074}{50}}=-0.0414 \rightarrow 0\]
+                </div>
+                <p>Fig.9에 Table-6의 데이터로부터 구한 c 관리도와 u 관리도를 나타내었다. </p>
+                <figure class="Figure">
+                    <img src="Fig-9.png" width="100%">
+                    <figcaption >Fig.9 c 관리도와 u 관리도</figcaption>
+                </figure>
+                <p>샘플의 크기가 같은 경우 c 관리도와 u 관리도는 동일한 모습을 보인다. 단지 샘플단위의 차이만 있기 때문이다. 
+                그러나 u 관리도의 경우는 1 단위당 결점수를 구하므로 샘플의 크기가 변해도 관리도를 구할 수 있다.</p>
+                <p>샘플의 크기가 변하는 경우의 u 관리도를 구해보자. Table-7의 데이터는 염색공정에서 나오는 데이터이다. 염색 
+                불량을 검사하기 위해 매 50m<suP>2</sup>마다 검사를 하여 결점수를 측정한다. Table-7의 1열은 옷감이 말려 있는 
+                롤러 번호, 2열은 롤러에 말려있는 옷감의 면적(m<sup>2</sup>), 3열은 롤러당 발생한 결점수, 4열은 롤러당 검사
+                횟수, 5열은 롤러에서 검사당 결점수를 나타낸다. 1행의 값을 설명하면, 롤러1의 직물면적은 500 m<sup>2</sup>
+                이므로 10번의 검사가 이루어진다. 이 롤러에서 총 결점수는 14개 이므로 검사횟수당(즉, 50m<sup>2</sup> 당) 
+                1.4개의 결점수가 되는 것이다.</p>
+                <figure class="Table">
+                    <figcaption>Table 7 샘플 크기가 변하는 결점수 데이터(<cite>Introduction to Statistical Quality Control
+                    , D.C. Montgomery</cite>)</figcaption>
+                    <img src="Table-8.png" width="600">
+                </figure>
+                <p>따라서 u 관리도의 CL과 관리한계선은 다음과 같다. </p>
+                <div class="equation">
+                \[CL = \bar{u} = \frac{총결점수}{총검사수}=\frac{153}{107.5}=1.42\] 
+                \[UCL = \bar{u} + 3 \sqrt{\frac{\bar{u}}{n_i}}=1.42 + 3\sqrt{\frac{1.42}{10}}=2.55 \,\,\, (for \, Roller\,1)\]
+                \[LCL = \bar{u} - 3 \sqrt{\frac{\bar{u}}{n_i}}=1.42 - 3\sqrt{\frac{1.42}{10}}=0.29 \,\,\, (for \, Roller\,1)\]
+                </div>
+                <p>샘플 크기가 변하므로 관리한계선도 변한다. 또한 p 관리도에서와 마찬가지로 u 관리도를 표준화할 수 있다. </p>
+                <div class="equation">
+                \[Z_i = \frac{u_i - \bar{u}}{\sqrt{\bar{u} / n_i}}\] 
+                </div>
+                <p>Fig.10에 u 관리도와 이를 표준화한 관리도를 나타내었다.</p>
+                <figure class="Figure">
+                    <img src="Fig-10.png" width="100%">
+                    <figcaption >Fig.10 u 관리도와 표준화 관리도</figcaption>
+                </figure>
+            </main>
+        </section>
+    </div>
+	
+</body>
+</html>

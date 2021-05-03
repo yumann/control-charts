@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>p Control Chart</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div class="container">
+        <header><h2>불량률(p), 불량수(np) 관리도</h2></header>
+        <section class="content">
+            <nav>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                </ul>
+                <h4>계량형 관리도</h4>
+                <ul>
+                    <li><a href="x-r.html">\(\bar{X} - R \) 관리도</a></li>
+                    <li><a href="x-s.html">\(\bar{X} - s \) 관리도</a></li>
+                    <li><a href="i-mr.html">\(x - mR \) 관리도</a></li>
+                    <li><a href="cusum.html">\(CUSUM\) 관리도</a></li>
+                    <li><a href="ewma.html">\(EWMA\) 관리도</a></li>
+                    <li><a href="coeff.html">관리도 계수표</a></li>
+                </ul>
+                <h4>계수형 관리도</h4>
+                <ul>
+                    <li><a href="p.html">p, np 관리도</a></li>
+                    <li><a href="cu.html">c, u 관리도</a></li>
+                </ul>
+            </nav>
+            <main>
+                <p>불량률(p) 관리도는 계수형 관리도 중에서 가장 널리 사용되는 관리도이다. 간단히 p 관리도라고 부르기도 한다. 
+                불량률의 변화를 탐지하거나 평균불량률을 추정하고 싶을 때 사용한다. 불량률 \(p\)인 공정에서 \(n\)개의 샘플을 
+                추출할 때 나오는 불량품의 갯수를 확률변수 \(X\)라 하면 이는 이항분포를 따른다.</p> 
+                <div class="equation">
+                \[P(X=x) = {n \choose x} p^x (1-p)^{n-x}\]
+                </div>
+                <p>따라서 평균은 \(np\), 분산은 \(np(1-p)\)이다. 이로부터 시료의 불량률 \(X/n\)의 평균과 분산은 각각 
+                \(p\), \(p(1-p)/n\) 이 된다. 따라서 공정불량률 \(p\)를 알고 있을 때 p 관리도의 중심선과 관리한계선은 
+                3&sigma;를 기준으로 하는 경우 다음과 같다. </p>
+                <div class="equation">
+                \[CL = p\]
+                \[UCL = CL + 3\sqrt{\frac{p(1-p)}{n}}\]
+                \[LCL = CL - 3\sqrt{\frac{p(1-p)}{n}}\]
+                </div>
+                <p>그러나 실제에서는 공정불량률 \(p\)를 모르고 있으므로 아래의 추정값으로 공정불량률을 대체하여 사용한다. </p>
+                <div class="equation">
+                \[\bar{p} = \frac{발견된 \, 불량품의 \, 갯수}{검사한 \,시료수}\]
+                </div>
+                <p>Table-5는 subgroup에서 샘플의 크기가 변하는 경우, 검사한 불량품의 수와 이로부터 불량률 관리도를 구하는 
+                과정을 나타낸 표이다. </p>
+                
+                <figure class="Table">
+                    <figcaption>Table 5 샘플 크기가 변하는 경우 p 관리도 데이터(<cite>Introduction to Statistical Quality Control
+                    , D.C. Montgomery</cite>)</figcaption>
+                    <img src="Table-6.png" width="700">
+                </figure>
+                <p>이 공정의 p 관리도는 다음과 같다. </p>
+                <div class="equation">
+                \[\bar{p}= \frac{발견된\,불량품의\,갯수}{검사한\,시료수}= \frac{\sum D_i}{\sum n_i}=\frac{234}{2450}=0.096\]
+                \[UCL=\bar{p} + 3\sqrt{\frac{\bar{p}(1-\bar{p})}{n_i}}=0.096 + 3\sqrt{\frac{(0.096)(0.904)}{n_i}}\]
+                \[LCL=\bar{p} - 3\sqrt{\frac{\bar{p}(1-\bar{p})}{n_i}}=0.096 - 3\sqrt{\frac{(0.096)(0.904)}{n_i}}\]
+                </div>
+                <p>각 subgroup 마다 샘플의 크기가 다르므로 관리한계선도 변한다. 관리한계선이 변한다는 것을 보완하기 위해 
+                표준화(standardized) 관리도로 변환하여 사용하기도 한다. 변환식은 다음과 같으며 관리한계선은 \(\pm\)3 으로 
+                일정하다. Fig.8에 p 관리도와 표준화된 z 관리도를 각각 나타내었다. </p>
+                <div class="equation">
+                \[Z_i = \frac{\hat{p}_i - \bar{p}}{\sqrt{\frac{\bar{p}(1-\bar{p})}{n_i}}}\]
+                </div>
+                <figure class="Figure">
+                    <img src="Fig-8.png" width="100%">
+                    <figcaption >Fig.8 p 관리도와 표준화된 z 관리도</figcaption>
+                </figure>
+                <hr>
+                <p>불량수(np) 관리도는 불량률(p) 관리도와 근본적으로 개념이 같다. 불량률에 샘플수를 곱해 불량수로 관리도를 
+                작성한다는 것뿐이다. n개의 샘플에서의 불량수 X를 확률변수라 할 때 이는 이항분포를 따르고, 평균과 분산은 
+                각각 \(np\), \(np(1-p)\) 이므로 관리도는 다음과 같은 수식으로 된다. </p>
+                <div class="equation">
+                \[CL = np\]
+                \[UCL = np + 3\sqrt{np(1-p)}\]
+                \[LCL = np - 3\sqrt{np(1-p)}\]
+                </div>
+                <p>그러나 실제에서는 공정불량률 \(p\)를 모르고 있으므로 위에서 추정한 값(\(\bar{p}\))으로 공정불량률을 
+                대체하여 사용한다. 이 관리도는 샘플수가 변할 때에는 사용하기가 어렵다. 따라서 np 관리도 보다는 p 관리도를
+                더 많이 사용한다. </p>
+            </main>
+        </section>
+    </div>
+	
+</body>
+</html>
